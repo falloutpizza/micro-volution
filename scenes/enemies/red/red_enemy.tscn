@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://mahyhyxarubt"]
+
+[ext_resource type="Texture2D" uid="uid://ddcbx68cei5fv" path="res://assets/enemies/Untitled28_20250606165240.png" id="1_3ktfg"]
+[ext_resource type="Script" path="res://scenes/enemies/red/red_enemy.gd" id="1_84nsm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2162e"]
+radius = 15.9784
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_odylc"]
+radius = 14.7886
+
+[node name="RedEnemy" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
+collision_layer = 16
+collision_mask = 33
+script = ExtResource("1_84nsm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.874559, 0.329653, 1)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("1_3ktfg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.44, 3.44)
+shape = SubResource("CircleShape2D_2162e")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_odylc")
+debug_color = Color(0.652227, 0.420774, 0.7872, 0.42)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

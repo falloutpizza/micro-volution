@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://be00an47oinu2"]
+
+[ext_resource type="PackedScene" uid="uid://xblh2td4iamy" path="res://scenes/player/player.tscn" id="1_cufsc"]
+[ext_resource type="PackedScene" uid="uid://co1wovjwlw4i0" path="res://scenes/enemies/yellow/yellow_enemy.tscn" id="2_qmqxj"]
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_cufsc")]
+position = Vector2(4323, 2607)
+scale = Vector2(6.485, 6.485)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+
+[node name="BlueEnemies" type="Node2D" parent="."]
+scale = Vector2(8.89, 8.89)
+
+[node name="YellowEnemies" type="Node2D" parent="."]
+
+[node name="YellowEnemy" parent="YellowEnemies" instance=ExtResource("2_qmqxj")]
+position = Vector2(3860, 2933)

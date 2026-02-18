@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://xblh2td4iamy"]
+
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_cwh76"]
+[ext_resource type="Texture2D" uid="uid://c62t4m7m2jq2y" path="res://assets/player/player.png" id="2_0t2t2"]
+[ext_resource type="Texture2D" uid="uid://is5gb5l28kbr" path="res://assets/player/disguise.png" id="3_jleh7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_04gcw"]
+radius = 8.45517
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q3kp0"]
+radius = 10.8133
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(5, 5)
+collision_mask = 33
+script = ExtResource("1_cwh76")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_04gcw")
+
+[node name="Color" type="Polygon2D" parent="."]
+color = Color(0.703632, 0.770346, 0.407684, 1)
+polygon = PackedVector2Array(-1.91226, -7.76153, -4.16198, -7.31159, -5.6243, -6.52418, -7.64904, -4.27447, -8.32396, -1.91226, -8.66142, 0.56243, -8.32396, 2.92463, -7.53656, 4.49944, -5.96176, 6.07424, -3.82452, 7.1991, -1.12486, 7.9865, 1.68729, 8.09899, 4.61192, 7.76153, 6.63667, 6.52418, 8.21147, 4.38695, 8.7739, 2.58718, 8.66142, 0.112486, 8.66142, -1.91226, 7.42407, -4.38695, 6.4117, -5.84927, 4.27447, -7.1991, 1.23735, -7.9865)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.327245, 0.682688, 0.401509, 1)
+position = Vector2(0.62, -0.575)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("2_0t2t2")
+
+[node name="Disguise" type="Sprite2D" parent="."]
+position = Vector2(0.615, -0.6)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("3_jleh7")
+
+[node name="Detector" type="Area2D" parent="."]
+visible = false
+collision_mask = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+shape = SubResource("CircleShape2D_q3kp0")
+debug_color = Color(0.669506, 0.404361, 0.800054, 0.42)
+
+[node name="DisguiseTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="timeout" from="DisguiseTimer" to="." method="_on_disguise_timer_timeout"]

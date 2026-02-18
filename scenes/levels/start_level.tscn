@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0yihlri5ohlo"]
+
+[ext_resource type="Script" path="res://scenes/levels/start_level.gd" id="1_cjhrq"]
+[ext_resource type="Texture2D" uid="uid://rb7v6tnap6gw" path="res://assets/ocean background.jpg" id="1_vdwyb"]
+[ext_resource type="FontFile" uid="uid://b5w0bkdrconq8" path="res://assets/MightySouly-lxggD.ttf" id="2_bcswj"]
+[ext_resource type="Texture2D" uid="uid://dtcua1ajfjqgg" path="res://assets/ui/button normal.png" id="4_5v0p8"]
+[ext_resource type="Texture2D" uid="uid://cc12fmcmbiqkp" path="res://assets/ui/button hover.png" id="5_87q1p"]
+[ext_resource type="Texture2D" uid="uid://b4l7wwblw01lg" path="res://assets/ui/instructions.png" id="6_fydcx"]
+[ext_resource type="AudioStream" uid="uid://c58tif7lkxrf0" path="res://assets/audio/background audio.ogg" id="7_56l3m"]
+
+[node name="StartLevel" type="Node2D"]
+script = ExtResource("1_cjhrq")
+
+[node name="OceanBackground" type="Sprite2D" parent="."]
+position = Vector2(636, 382)
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("1_vdwyb")
+
+[node name="Microvolution" type="RichTextLabel" parent="."]
+offset_left = 272.0
+offset_top = 191.0
+offset_right = 925.0
+offset_bottom = 318.0
+scale = Vector2(1.195, 1.195)
+theme_override_fonts/normal_font = ExtResource("2_bcswj")
+theme_override_font_sizes/normal_font_size = 100
+text = "micro-volution"
+
+[node name="Play" type="TextureButton" parent="."]
+offset_left = 565.0
+offset_top = 327.0
+offset_right = 965.0
+offset_bottom = 727.0
+scale = Vector2(0.37, 0.37)
+texture_normal = ExtResource("4_5v0p8")
+texture_hover = ExtResource("5_87q1p")
+
+[node name="Instructions" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(640, 375)
+texture = ExtResource("6_fydcx")
+
+[node name="Play2" type="TextureButton" parent="."]
+visible = false
+offset_left = 1094.0
+offset_top = 559.0
+offset_right = 1494.0
+offset_bottom = 959.0
+scale = Vector2(0.37, 0.37)
+texture_normal = ExtResource("4_5v0p8")
+texture_hover = ExtResource("5_87q1p")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_56l3m")
+autoplay = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Play" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Play2" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Play2" to="." method="_on_play_2_pressed"]
+[connection signal="pressed" from="Play2" to="." method="_on_texture_button_pressed"]

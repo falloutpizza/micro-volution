@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=3 uid="uid://c680qoaqkycgd"]
+
+[ext_resource type="Script" path="res://scenes/levels/main_level.gd" id="1_eiage"]
+[ext_resource type="Texture2D" uid="uid://rb7v6tnap6gw" path="res://assets/ocean background.jpg" id="1_ymrg5"]
+[ext_resource type="PackedScene" uid="uid://xblh2td4iamy" path="res://scenes/player/player.tscn" id="2_ll3ku"]
+[ext_resource type="FontFile" uid="uid://b5w0bkdrconq8" path="res://assets/MightySouly-lxggD.ttf" id="4_qebx4"]
+[ext_resource type="PackedScene" uid="uid://x4ht3wq0ik2h" path="res://scenes/levels/losing_level.tscn" id="5_eg21o"]
+[ext_resource type="AudioStream" uid="uid://c58tif7lkxrf0" path="res://assets/audio/background audio.ogg" id="6_4686m"]
+
+[node name="MainLevel" type="Node2D"]
+script = ExtResource("1_eiage")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-29, -50)
+texture = ExtResource("1_ymrg5")
+
+[node name="Barriers" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 31
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Barriers"]
+visible = false
+polygon = PackedVector2Array(-3028, -2046, 2963, -2049, 2963, 1948, -3027, 1944, -3028, -2038, -2820, -1797, -2776, 1736, 2713, 1700, 2669, -1810, -2824, -1821)
+
+[node name="Player" parent="." instance=ExtResource("2_ll3ku")]
+position = Vector2(576, 323)
+scale = Vector2(3, 3)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.485, 1.485)
+limit_left = -2800
+limit_top = -2000
+limit_right = 2800
+limit_bottom = 1900
+
+[node name="BlueEnemies" type="Node2D" parent="."]
+scale = Vector2(0.6, 0.6)
+
+[node name="YellowEnemies" type="Node2D" parent="."]
+scale = Vector2(0.6, 0.6)
+
+[node name="OrangeEnemies" type="Node2D" parent="."]
+scale = Vector2(0.6, 0.6)
+
+[node name="RedEnemies" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="Panel" parent="CanvasLayer"]
+offset_left = 70.545
+offset_top = 60.875
+offset_right = 71.545
+offset_bottom = 61.875
+scale = Vector2(1.7, 1.7)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/ProgressBar"]
+layout_mode = 0
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 178.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/ProgressBar"]
+layout_mode = 0
+offset_left = -25.97
+offset_top = 8.59
+offset_right = 174.03
+offset_bottom = 26.59
+color = Color(1, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/ProgressBar"]
+layout_mode = 0
+offset_left = -24.0
+offset_top = 7.5
+offset_right = 53.0
+offset_bottom = 47.5
+theme_override_fonts/normal_font = ExtResource("4_qebx4")
+text = "0"
+
+[node name="HealthBar" type="Panel" parent="CanvasLayer"]
+offset_left = 79.0
+offset_top = 6.0
+offset_right = 80.0
+offset_bottom = 7.0
+scale = Vector2(2, 2)
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/HealthBar"]
+layout_mode = 0
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 208.065
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/HealthBar"]
+layout_mode = 0
+offset_left = -25.97
+offset_top = 8.59
+offset_right = 205.255
+offset_bottom = 26.59
+color = Color(0.226895, 0.637299, 0, 1)
+
+[node name="LosingLevel" parent="CanvasLayer" instance=ExtResource("5_eg21o")]
+visible = false
+position = Vector2(203.045, 100)
+
+[node name="WinningText" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+offset_left = 193.03
+offset_top = 103.625
+offset_right = 1078.69
+offset_bottom = 397.625
+theme_override_fonts/normal_font = ExtResource("4_qebx4")
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[center]ccongrats! by being eaten by the red microbe, you have finally achieved enough traits to evolve to a higher form.[center]"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_4686m")
+autoplay = true
+
+[editable path="CanvasLayer/LosingLevel"]
